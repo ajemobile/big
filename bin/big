@@ -2,7 +2,5 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'bigmagic'
 
-puts $LOAD_PATH
-
-big = Bigmagic::Main.new
+big = Bigmagic::Main.new(STDOUT)
 big.run(ARGV)
