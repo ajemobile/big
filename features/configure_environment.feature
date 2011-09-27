@@ -1,8 +1,8 @@
 #language: en
 Feature: Configure Environment
   
-  I in order to configure all the environment once
-  As a Bigmagic database manager
+  In order to configure all the environment once
+  As a User
   I want to set up, save and show all configured values using a command line tool
   
   Scenario: Configure a single command's attribure
