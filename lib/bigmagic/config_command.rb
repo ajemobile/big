@@ -8,7 +8,8 @@ module Bigmagic
 
     def set_default
       # Database server
-      source = target = Struct.new("Server", :address, :port).new("172.16.0.10", "1433")
+      database = Struct.new("Database", :name, :schema).new("bdcertifica", "dbo")
+      source = target = Struct.new("Server", :address, :port, :database).new("172.16.0.10", "1433", database)
       # Configure struct
       @config = Struct.new("Config", :target, :source).new(
                                                            target,
