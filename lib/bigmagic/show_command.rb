@@ -3,7 +3,7 @@ module Bigmagic
   class ShowCommand < Bigmagic::Command
 
     def execute
-      output.puts "show"
+      stdout.puts "show"
     end
 
   end

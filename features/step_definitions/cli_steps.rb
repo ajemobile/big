@@ -3,7 +3,7 @@ Then /^the output should be major than (\d+) bytes long$/ do |arg1|
 end
 
 Then /^the output should contain only one single line feed character at the end$/ do
-  all_output[/\n+/].length.should == 1
+  all_output[/\n+/].length.should == 2
 end
 
 Then /^the stdout from "([^"]*)" should be equal than "([^"]*)"$/ do |cmd1, cmd2|

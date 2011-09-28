@@ -1,1 +1,2 @@
 require "bigmagic"
+require "stringio"

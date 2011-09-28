@@ -7,23 +7,18 @@ Feature: Configure Environment
   
   Scenario: Configure a single command's attribure
     When I run `big.bat config target.ip 172.16.0.10`
-    Then the output should contain exactly "target.ip = 172.16.0.10\n"
+    Then the output should contain "target:"
+    And the output should contain key "ip:" and value "172.16.0.10"
 
   Scenario: Configure two attributes using full qualified names
     When I run `big.bat config target.ip 172.16.0.10 target.port 1433`
-    Then the output should contain exactly:
-    """
-    target.ip = 172.16.0.10
-    target.port = 1433
+    Then the output should contain "target:"
+    And the output should contain key "ip:" and value "172.16.0.10"
+    And the output should contain key "port:" and value "1433"
 
-    """
   Scenario: Configure two attributes using a parent command options
-    When I run `big.bat config --parent target ip 172.16.0.10 port 1433`
-    Then the output should contain exactly:
-    """
-    target.ip = 172.16.0.10
-    target.port = 1433
-
-    """
-
+    When I run `big.bat config --parent target ip 172.16.0.23 port 1111`
+    Then the output should contain "target:"
+    And the output should contain key "ip:" and value "172.16.0.23"
+    And the output should contain key "port:" and value "1111"
 

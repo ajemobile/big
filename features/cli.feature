@@ -10,11 +10,5 @@ Feature: Command line interface
     Then the output should be major than 0 bytes long
     And the output should contain only one single line feed character at the end
 
-  Scenario: Default command is help
-    When I run `big.bat`
-    And I run `big.bat --help`
-    And I run `big.bat help`
-    Then the stdout from "big.bat" should be equal than "big.bat --help"
-    And the stdout from "big.bat --help" should be equal than "big.bat"
 
 
