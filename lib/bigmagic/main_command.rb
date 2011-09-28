@@ -1,11 +1,6 @@
 module Bigmagic
 
-  class MainCommand < Clamp::Command
-
-    # options
-    option ["-c", "--config"], "CONFIG", "Configuration file", 
-    :default => File.expand_path("../../../etc/bigmagic.yml", __FILE__), 
-    :attribute_name => :config_filename
+  class MainCommand < Bigmagic::Command
 
     # sub comamnds
     subcommand "config", "save/show configuration environment", Bigmagic::ConfigCommand

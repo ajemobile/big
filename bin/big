@@ -2,4 +2,4 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'bigmagic'
 
-Bigmagic::MainCommand.run(File.basename($0), ARGV, :output => STDOUT)
+Bigmagic::MainCommand.run
