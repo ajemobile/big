@@ -4,29 +4,30 @@ module Bigmagic
 
   class Command < Clamp::Command
 
-    attr_reader :stdout, :stderr
+    attr_reader :out, :err
 
     # options
     option ["-c", "--config"], "FILENAME", "configuration file",
     :default => File.expand_path("../../../etc/bigmagic.yml", __FILE__),
     :attribute_name => :config_filename
 
-    def initialize(filename = File.basename($0), context = {}, stdout = STDOUT, stderr = STDERR)
-      @stdout, @stderr = stdout, stderr
+    def initialize(filename = File.basename($0), context = {}, out = STDOUT, err = STDERR)
+      @out = out
+      @err = err
       super(filename, context)
     end
 
     class << self
-      def run(invocation_path = File.basename($0), stdout = $stdout, stderr = $stderr, arguments = ARGV, context = {})
+      def run(filename = File.basename($0), out = STDOUT, err = STDERR, arguments = ARGV, context = {})
         begin
-          new(invocation_path, context, stdout, stderr).run(arguments)
+          new(filename, context, out, err).run(arguments)
         rescue Clamp::UsageError => e
-          stderr.puts "ERROR: #{e.message}"
-          stderr.puts ""
-          stderr.puts "See: '#{e.command.invocation_path} --help'"
+          err.puts "ERROR: #{e.message}"
+          err.puts ""
+          err.puts "See: '#{e.command.invocation_path} --help'"
           exit(1)
         rescue Clamp::HelpWanted => e
-          stdout.puts e.command.help
+          out.puts e.command.help
         end
       end
 
@@ -36,5 +37,3 @@ module Bigmagic
 
 
 end
-
-#Bigmagic::Command.run("jajaj", STDOUT, STDERR, %w{--help})

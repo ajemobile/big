@@ -1,3 +1,4 @@
+require 'bigmagic'
 require 'yaml'
 
 module Bigmagic
@@ -10,31 +11,17 @@ module Bigmagic
 
     parameter "[PAIR] ...", "key value pairs separated by space", :attribute_name => :pairs
 
-    def set_default
-      # Database struct
-      dbtarget = Struct.new("Database", :name, :schema).new("bdcertifica", "dbo")
-      dbsource = dbtarget.dup
-      # Target and source servers
-      target = Struct.new("Server", :ip, :port, :username, :password, :database).new("172.16.0.10",
-                                                                                     "1433",
-                                                                                     "usr_bcp",
-                                                                                     "Usr_Bcp01",
-                                                                                     dbtarget)
-      source = target.dup
-      source.database = dbsource
-      # Configure struct
-      @config = Struct.new("Config", :target, :source).new(target,
-                                                           source)
-    end
 
-    def load_config(filename)
+    def load_file(filename = config_filename)
       set_default
     end
 
+    def get(string)
+      key = string.split('.').inject(config) {|key,member| key.send(member)}
+    end
+
     def execute
-      stdout.puts "Configuration file: #{@config_filename}"
-      load_config(config_filename)
-      stdout.puts config.to_yaml
+      out.puts "Configuration file: #{@config_filename}"
     end
 
   end
