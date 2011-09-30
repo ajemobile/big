@@ -1,11 +1,9 @@
-require 'bigmagic'
 require 'yaml'
 
 module Bigmagic
 
   class ConfigCommand < Bigmagic::Command
 
-    attr_reader :config
 
     option ["-s", "--section"], "SECTION", "parent section to configure", :attribute_name => :section
 
@@ -13,6 +11,12 @@ module Bigmagic
 
     def execute
       out.puts "Configuration file: #{config_filename}"
+    end
+
+    def set_config(key, value)
+      config = Bigmagic.config(config_filename)
+      key.gsub!('=','')
+      config.send(key, value)
     end
 
   end
