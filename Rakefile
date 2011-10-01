@@ -1,7 +1,5 @@
-require "cucumber/rake/task"
+require 'cucumber/rake/task'
 
-Cucumber::Rake::Task.new(:cucumber) do |task|
-  task.cucumber_opts = ["-v", "features"]
-end
+Cucumber::Rake::Task.new
 
 task :default => :cucumber

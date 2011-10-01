@@ -14,9 +14,10 @@ module Bigmagic
     end
 
     def set_config(key, value)
-      config = Bigmagic.config(config_filename)
+      config = Bigmagic.load_config(config_filename)
       key.gsub!('=','')
-      config.send(key, value)
+      eval("config.#{key}=\"#{value}\"")
+      Bigmagic.save_config(config_filename, config)
     end
 
   end

@@ -4,9 +4,9 @@ Feature: Configure Environment
   In order to configure all the environment once
   As a User
   I want to set up, save and show all configured values using a command line tool
-  
+
   Scenario: Configure target ip using full qualified names
-    When I run `big.bat config target.ip 172.16.0.10`
+    When I run `ruby big config target.ip 172.16.0.10`
     Then the output should indicate the full name for the YAML file used (default is "etc/bigmagic.yml")
     And the member "target.ip" with value "172.16.0.10" should be saved into the file
     And the output should contain "target:"
