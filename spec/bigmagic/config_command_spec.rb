@@ -46,7 +46,14 @@ module Bigmagic
 
       context 'to show configuration settings' do
 
-        context 'with valid parametes' do
+        context 'without parameters' do
+          it 'should show the current configuration environment' do
+            cmd.run(%w{})
+            out.string.should include("target.ip")
+          end
+        end
+
+        context 'with valid parameters' do
           it 'should show configuration target.ip' do
             cmd.run(%w{--show target.ip})
             out.string.should include("target.ip")

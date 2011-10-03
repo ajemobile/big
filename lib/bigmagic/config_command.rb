@@ -7,11 +7,12 @@ module Bigmagic
     option ["-s", "--section"], "SECTION", "parent section to configure", :attribute_name => :section
     option ["-w", "--show"], :flag, "show key's configuration value", :attribute_name => :show
 
-    parameter "[params] ...", "list of key value pairs separated by space", :attribute_name => :params
+    parameter "[PARAMS] ...", "list of key value pairs separated by space", :attribute_name => :params
 
     def execute
       out.puts "Configuration file: #{config_filename}"
       load_config
+      show = true if params.empty?
       if show?
         get(params, section)
       else

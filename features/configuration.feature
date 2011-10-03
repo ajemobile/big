@@ -5,8 +5,8 @@ Feature: Configure Environment
   As a User
   I want to set up, save and show all configured values using a command line tool
 
-  Scenario Outline: Configure a single key using full qualified name
-    When I run: ruby big config "<key>" "<value>"
+  Scenario Outline: Configure a single key/value pair using full qualified name
+    When I run: "ruby big config" "<key>" "<value>"
     Then the "<key>"/"<value>" pair should be saved into "etc/bigmagic.yml"
     And the output should show the fullpath of the configuration file used
     And the output should show "<key>" = "<value>"
@@ -25,4 +25,10 @@ Feature: Configure Environment
   | source.password        | ajegroup    |
   | source.database.name   | bdcertifica |
   | source.database.schema | dbo         |
+
+  Scenario: Show the current configuration environment
+    When I run `ruby big config`
+    And the output should show the fullpath of the configuration file used
+    And the output should show "key" = "value"
+
 

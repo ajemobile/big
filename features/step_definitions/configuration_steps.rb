@@ -1,5 +1,5 @@
-When /^I run: ruby big config "([^"]*)" "([^"]*)"$/ do |key, value|
-  When("I run `ruby big config #{key} #{value}`")
+When /^I run: "([^"]*)" "([^"]*)" "([^"]*)"$/ do |command, param1, param2|
+  When("I run `#{command} #{param1} #{param2}`")
 end
 
 Then /^the "([^"]*)"\/"([^"]*)" pair should be saved into "([^"]*)"$/ do |key, value, filename|
