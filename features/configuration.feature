@@ -5,22 +5,24 @@ Feature: Configure Environment
   As a User
   I want to set up, save and show all configured values using a command line tool
 
-  Scenario: Configure target ip using full qualified names
-    When I run `ruby big config target.ip 172.16.0.10`
-    Then the output should indicate the full name for the YAML file used (default is "etc/bigmagic.yml")
-    And the member "target.ip" with value "172.16.0.10" should be saved into the file
-    And the output should contain "target"
-    And the output should contain key "ip" and value "172.16.0.10"
+  Scenario Outline: Configure a single key using full qualified name
+    When I run: ruby big config "<key>" "<value>"
+    Then the "<key>"/"<value>" pair should be saved into "etc/bigmagic.yml"
+    And the output should show the fullpath of the configuration file used
+    And the output should show "<key>" = "<value>"
 
-  Scenario: Configure target ant port using full qualified names
-    When I run `ruby big config target.ip 172.16.0.10 target.port 1433`
-    Then the output should contain "target:"
-    And the output should contain key "ip:" and value "172.16.0.10"
-    And the output should contain key "port:" and value "1433"
-
-  Scenario: Configure target and port using parent section
-    When I run `ruby big config --section target ip 172.16.0.23 port 1111`
-    Then the output should contain "target:"
-    And the output should contain key "ip:" and value "172.16.0.23"
-    And the output should contain key "port:" and value "1111"
+  Scenarios:
+  | key                    | value       |
+  | target.ip              | 172.16.0.10 |
+  | target.port            | 1433        |
+  | target.username        | ajegroup    |
+  | target.password        | ajegroup    |
+  | target.database.name   | bdcertifica |
+  | target.database.schema | dbo         |
+  | source.ip              | 172.16.0.10 |
+  | source.port            | 1433        |
+  | source.username        | ajegroup    |
+  | source.password        | ajegroup    |
+  | source.database.name   | bdcertifica |
+  | source.database.schema | dbo         |
 
