@@ -9,8 +9,8 @@ Feature: Configure Environment
     When I run `ruby big config target.ip 172.16.0.10`
     Then the output should indicate the full name for the YAML file used (default is "etc/bigmagic.yml")
     And the member "target.ip" with value "172.16.0.10" should be saved into the file
-    And the output should contain "target:"
-    And the output should contain key "ip:" and value "172.16.0.10"
+    And the output should contain "target"
+    And the output should contain key "ip" and value "172.16.0.10"
 
   Scenario: Configure target ant port using full qualified names
     When I run `ruby big config target.ip 172.16.0.10 target.port 1433`

@@ -2,6 +2,8 @@ require 'clamp'
 
 module Bigmagic
 
+  DEFAULT_COFIG_FILE = File.expand_path("../../../etc/bigmagic.yml", __FILE__)
+
   class Command < Clamp::Command
 
     attr_reader :out, :err

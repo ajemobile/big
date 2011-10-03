@@ -1,6 +1,6 @@
 --- !ruby/struct:Config 
 source: !ruby/struct:Server 
-  ip: 172.16.0.10
+  ip: "1231322"
   port: "1433"
   username: usr_bcp
   password: Usr_Bcp01
@@ -8,9 +8,9 @@ source: !ruby/struct:Server
     name: bdcertifica
     schema: dbo
 target: !ruby/struct:Server 
-  ip: 172.16.0.10
-  port: "1433"
-  username: usr_bcp
+  ip: 172.123.121.21
+  port: "8080"
+  username: emadrid
   password: Usr_Bcp01
   database: !ruby/struct:Database 
     name: bdcertifica

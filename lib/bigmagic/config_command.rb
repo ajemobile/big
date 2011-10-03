@@ -4,18 +4,18 @@ module Bigmagic
 
   class ConfigCommand < Bigmagic::Command
 
-
     option ["-s", "--section"], "SECTION", "parent section to configure", :attribute_name => :section
+    option ["-w", "--show"], :flag, "show key's configuration value", :attribute_name => :show
 
-    parameter "[params] ...", "key value pairs separated by space", :attribute_name => :params
+    parameter "[params] ...", "list of key value pairs separated by space", :attribute_name => :params
 
     def execute
       out.puts "Configuration file: #{config_filename}"
       load_config
-      if (params.size % 2) == 0
-        set(params)
+      if show?
+        get(params, section)
       else
-        get(params)
+        set(params, section)
       end
     end
 
@@ -23,16 +23,30 @@ module Bigmagic
       Bigmagic.save_config(config_filename, config)
     end
 
-    def set(pairs)
-      
-      set_config(key, value)
+    def get(params, section)
+      params.each {|k| get_config(k, section)}
     end
 
-    def set_config(key, value)
-      key.gsub!('=','')
-      eval("config.#{key}=\"#{value}\"")
-      save_config
-      out.puts "#{key} = #{value}"
+    def set(params, section)
+      Hash[*params].each {|k,v| set_config(k, v, section)}
+    end
+
+    def get_config(k, section)
+      begin
+        eval(section == nil ? "out.puts \"#{k} = config.#{k}\"" : "out.puts \"#{k} = config.#{section}.#{k}\"")
+      rescue
+        err.puts "#{k}: invalid configuration key"
+      end
+    end
+
+    def set_config(k, v, section)
+      begin
+        eval(section == nil ? "config.#{k}=\"#{v}\"" : "config.#{section}.#{k} = \"#{v}\"")
+        save_config
+        out.puts "#{k} = #{v}"
+      rescue
+        err.puts "#{k}: invalid configuration key"
+      end
     end
 
   end
