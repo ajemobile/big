@@ -4,6 +4,8 @@ require "bigmagic/main_command"
 
 module Bigmagic
 
+  DEFAULT_COFIG_FILE = File.expand_path("../../etc/bigmagic.yml", __FILE__)
+
   Config = Struct.new('Config', :source, :target)
   Server = Struct.new('Server', :ip, :port, :username, :password, :database)
   Database = Struct.new('Database', :name, :schema)

@@ -5,16 +5,21 @@ module Bigmagic
   class Command < Clamp::Command
 
     attr_reader :out, :err
+    attr_reader :config
 
     # options
     option ["-c", "--config"], "FILENAME", "configuration file",
-    :default => File.expand_path("../../../etc/bigmagic.yml", __FILE__),
+    :default => Bigmagic::DEFAULT_COFIG_FILE,
     :attribute_name => :config_filename
 
     def initialize(filename = File.basename($0), context = {}, out = STDOUT, err = STDERR)
       @out = out
       @err = err
       super(filename, context)
+    end
+
+    def load_config
+      @config = Bigmagic.load_config(config_filename)
     end
 
     class << self
