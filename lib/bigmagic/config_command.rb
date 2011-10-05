@@ -20,16 +20,20 @@ module Bigmagic
       end
     end
 
-    def save_config
-      Bigmagic.save_config(config_filename, config)
-    end
-
     def get(params, section)
-      params.each {|k| get_config(k, section)}
+      begin
+        params.each {|k| get_config(k, section)}
+      rescue e
+        err.puts e.message
+      end
     end
 
     def set(params, section)
-      Hash[*params].each {|k,v| set_config(k, v, section)}
+      begin
+        Hash[*params].each {|k,v| set_config(k, v, section)}
+      rescue e
+        err.puts e.message
+      end
     end
 
   end

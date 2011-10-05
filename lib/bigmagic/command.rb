@@ -21,7 +21,7 @@ module Bigmagic
     end
 
     def load_config
-      @config = Bigmagic.load_config(config_filename)
+      @config = Bigmagic::Config.open(config_filename)
     end
 
     class << self
