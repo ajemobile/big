@@ -49,6 +49,32 @@ module Bigmagic
       self
     end
 
+    def set(key, value, section = nil)
+      begin
+        key = "#{section}.#{key}" unless section.nil?
+        eval("self.#{key}='#{value}'")
+      rescue
+        raise "#{key}: invalid configuration key"
+      end
+    end
+
+    def get(key, section = nil)
+      begin
+        key = "#{section}.#{key}" unless section.nil?
+        eval("#{key}")
+      rescue
+        err.puts "#{key}: invalid configuration key"
+      end
+    end
+
+    def to_yaml_properties
+      %w{@target @source}
+    end
+
+    def to_s
+      to_yaml
+    end
+
     def self.create
       c = Config.new
       c.default!

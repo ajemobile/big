@@ -31,7 +31,7 @@ module Bigmagic
             cmd.config.target.port == '23'
           end
 
-        end
+        end # context: 'with valid parameters'
 
         context 'with invalid parameters' do
 
@@ -40,9 +40,9 @@ module Bigmagic
             err.string.should include('invalid configuration key')
           end
 
-        end
+        end # context: 'with invalid parameteres'
 
-      end
+      end # context: 'for set up configuration environment'
 
       context 'to show configuration settings' do
 
@@ -51,19 +51,19 @@ module Bigmagic
             cmd.run(%w{})
             out.string.should include("target.ip")
           end
-        end
+        end # context: 'with out parameters'
 
         context 'with valid parameters' do
           it 'should show configuration target.ip' do
             cmd.run(%w{--show target.ip})
             out.string.should include("target.ip")
           end
-        end
+        end # context: 'with valid parameteres'
 
-      end
+      end # context: 'to show configuration settings'
 
-    end
+    end # describe: '#run'
 
-  end
+  end # describe: ConfigCommand
 
 end

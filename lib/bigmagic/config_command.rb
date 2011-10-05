@@ -32,24 +32,6 @@ module Bigmagic
       Hash[*params].each {|k,v| set_config(k, v, section)}
     end
 
-    def get_config(k, section)
-      begin
-        eval(section == nil ? "out.puts \"#{k} = config.#{k}\"" : "out.puts \"#{k} = config.#{section}.#{k}\"")
-      rescue
-        err.puts "#{k}: invalid configuration key"
-      end
-    end
-
-    def set_config(k, v, section)
-      begin
-        eval(section == nil ? "config.#{k}=\"#{v}\"" : "config.#{section}.#{k} = \"#{v}\"")
-        save_config
-        out.puts "#{k} = #{v}"
-      rescue
-        err.puts "#{k}: invalid configuration key"
-      end
-    end
-
   end
 
 end
