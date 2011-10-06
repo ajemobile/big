@@ -12,8 +12,9 @@ module Bigmagic
     def execute
       out.puts "Configuration file: #{config_filename}"
       load_config
-      show = true if params.empty?
-      if show?
+      if params.empty?
+        out.puts config
+      elsif show?
         get(params, section)
       else
         set(params, section)
@@ -21,18 +22,25 @@ module Bigmagic
     end
 
     def get(params, section)
+      out.puts "#{section}" unless section.nil?
       begin
-        params.each {|k| get_config(k, section)}
-      rescue e
-        err.puts e.message
+        params.each do |k|
+          out.puts "#{k} = #{config.get(k, section)}"
+        end
+      rescue
+        err.puts "invalid configuration key"
       end
     end
 
     def set(params, section)
+      out.puts "#{section}" unless section.nil?
       begin
-        Hash[*params].each {|k,v| set_config(k, v, section)}
-      rescue e
-        err.puts e.message
+        Hash[*params].each do |k,v|
+          config.set(k, v, section)
+          out.puts "#{k} = #{v}"
+        end
+      rescue
+        err.puts "invalid configuration key"
       end
     end
 

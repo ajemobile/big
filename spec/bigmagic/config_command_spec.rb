@@ -10,7 +10,7 @@ module Bigmagic
 
     describe '#run' do
 
-      context 'for set up configuration environment' do
+      context 'to set up configuration environment' do
 
         context 'with valid parameters' do
 
@@ -25,7 +25,7 @@ module Bigmagic
             cmd.config.target.port == '3122'
           end
 
-          it 'should set both target.ip and target port using section option' do
+          it 'should set both target.ip and target.port using section option' do
             cmd.run(%w{--section target ip 172.16.0.22 port 23})
             cmd.config.target.ip.should == '172.16.0.22'
             cmd.config.target.port == '23'
@@ -49,14 +49,20 @@ module Bigmagic
         context 'without parameters' do
           it 'should show the current configuration environment' do
             cmd.run(%w{})
-            out.string.should include("target.ip")
+            out.string.should include(cmd.config.to_s)
           end
         end # context: 'with out parameters'
 
         context 'with valid parameters' do
           it 'should show configuration target.ip' do
             cmd.run(%w{--show target.ip})
-            out.string.should include("target.ip")
+            out.string.should include("target.ip = #{cmd.config.target.ip}")
+          end
+          it 'should show both ip and port configuration keys for target section' do
+            cmd.run(%w{--show --section target ip port})
+            out.string.should include("target")
+            out.string.should include("ip = #{cmd.config.target.ip}")
+            out.string.should include("port = #{cmd.config.target.port}")
           end
         end # context: 'with valid parameteres'
 
