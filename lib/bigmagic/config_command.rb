@@ -37,6 +37,7 @@ module Bigmagic
       begin
         Hash[*params].each do |k,v|
           config.set(k, v, section)
+          save_config
           out.puts "#{k} = #{v}"
         end
       rescue

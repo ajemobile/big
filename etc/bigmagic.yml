@@ -1,15 +1,15 @@
 --- !ruby/object:Bigmagic::Config 
 target: !ruby/struct:Server 
-  ip: 172.16.0.10
-  port: "1433"
+  ip: 172.16.0.22
+  port: "23"
   username: usr_bcp
-  password: Usr_Bcp01
+  password: caramelo
   database: !ruby/struct:Database 
     name: bdcertifica
     schema: dbo
 source: !ruby/struct:Server 
-  ip: 172.16.0.10
-  port: "1433"
+  ip: adadas
+  port: adasd
   username: usr_bcp
   password: Usr_Bcp01
   database: !ruby/struct:Database 

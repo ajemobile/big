@@ -19,6 +19,11 @@ module Bigmagic
             cmd.config.target.ip.should == '172.16.0.11'
           end
 
+          it 'should save key/value pair into configuration file' do
+            cmd.run(%w{target.ip 172.16.0.11})
+            cmd.config.target.ip.should == Bigmagic::Config.open(cmd.config_filename).target.ip
+          end
+
           it 'should set both target.ip and target.port using full qualyfied name ' do
             cmd.run(%w{target.ip 172.16.0.16 target.port 3122})
             cmd.config.target.ip.should == '172.16.0.16'
