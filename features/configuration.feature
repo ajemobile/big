@@ -26,9 +26,5 @@ Feature: Configure Environment
   | source.database.name   | bdcertifica |
   | source.database.schema | dbo         |
 
-  Scenario: Show the current configuration environment
-    When I run `ruby big config`
-    And the output should show the fullpath of the configuration file used
-    And the output should show "key" = "value"
 
 
