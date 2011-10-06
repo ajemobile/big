@@ -1,3 +1,11 @@
-Then /^all listed tables could be filtered with "([^"]*)"$/ do |sqlfilter|
-  pending # express the regexp above with the code you wish you had
+When /^I run: ruby big list tables "([^"]*)"$/ do |server|
+  When("I run `ruby big list tables #{server}`")
+end
+
+Then /^all "([^"]*)"'s tables are listed$/ do |server|
+  cmd = Bigmagic::ListCommand.new('config', nil, out)
+  cmd.run("#{server}".split)
+  cmd.tables.each do |tablename|
+    Then("the output should contain \"#{tablename}\"")
+  end
 end

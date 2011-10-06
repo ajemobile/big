@@ -3,7 +3,7 @@ Feature: list
 
   In order to inspect the data to migrate
   As a User
-  I want to list tables from the servers
+  I want to list tables in the server
 
   Scenario: list all tables in the specified server
     When I run: ruby big list tables "source"
