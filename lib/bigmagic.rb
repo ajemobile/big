@@ -1,4 +1,8 @@
 require 'bigmagic/config'
+require 'bigmagic/recordset'
+require 'bigmagic/database'
+require 'bigmagic/server'
 require 'bigmagic/command'
 require 'bigmagic/config_command'
+require 'bigmagic/list_command'
 require 'bigmagic/main_command'
