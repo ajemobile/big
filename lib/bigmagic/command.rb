@@ -7,7 +7,7 @@ module Bigmagic
   class Command < Clamp::Command
 
     attr_reader :out, :err
-    attr_reader :config
+    attr_accessor :config
 
     # options
     option ["-c", "--config"], "FILENAME", "configuration file",
@@ -20,8 +20,23 @@ module Bigmagic
       super(filename, context)
     end
 
+    def config
+      @config = Bigmagic::Config.new if @config.nil?
+      @config
+    end
+
     def load_config
-      @config = Bigmagic::Config.open(config_filename)
+      if File.exists?(config_filename)
+        @config = Bigmagic::Config.open(config_filename)
+      else
+        @config = Bigmagic::Config.new
+        save_config
+      end
+    end
+
+    def save_config
+      @config = Bigmagic::Config.new if config.nil?
+      config.save(config_filename)
     end
 
     class << self
