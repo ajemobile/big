@@ -21,7 +21,7 @@ module Bigmagic
     end
 
     def config
-      @config = Bigmagic::Config.new if @config.nil?
+      load_config if @config.nil?
       @config
     end
 

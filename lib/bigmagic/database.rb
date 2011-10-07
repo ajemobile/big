@@ -1,8 +1,14 @@
 module Bigmagic
+
   class Database
-    attr_reader :recorset
+
+    attr_accessor :name, :schema
+    attr_accessor :recordset
+
     def initialize
-      @recorset = Bigmagic::Recordset.new
+      @recordset = nil
     end
+
   end
+
 end

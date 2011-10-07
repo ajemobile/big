@@ -12,10 +12,10 @@ module Bigmagic
         it 'should list all selected tables in the server' do
           recordset = double('recordset')
           recordset.stub(:column).and_return(['COMPANIAS', 'PERSONAS'])
-          cmd.target.database.recordset.columns = recordset
+          cmd.target.database.recordset = recordset
           out.should_receive(:puts).with('COMPANIAS')
           out.should_receive(:puts).with('PERSONAS')
-          cmd.run(%{tables target})
+          cmd.run(%w{tables target})
         end
       end # context: #with valid parameters
     end # describe: '#run'
