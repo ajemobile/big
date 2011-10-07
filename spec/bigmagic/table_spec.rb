@@ -8,7 +8,8 @@ module Bigmagic
         target.database.create(:table, 'COMPANIAS')
         target.database.create(:table, 'SUCURSALES')
         tables = target.database.find(:table)
-        table.find.class
+        tables.name.should include('COMPANIAS')
+
       end
     end # describe: '#find'
   end
