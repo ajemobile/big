@@ -1,11 +1,8 @@
-When /^I run: ruby big list tables "([^"]*)"$/ do |server|
-  When("I run `ruby big list tables #{server}`")
+Given /^that table "([^"]*)" exists in the "([^"]*)" server$/ do |tablename, server|
+  @tablename = tablename
+  puts "The table #{tablename} should exist in the #{server} server"
 end
 
-Then /^all "([^"]*)"'s tables are listed$/ do |server|
-  cmd = Bigmagic::ListCommand.new('config', nil, out)
-  cmd.run("#{server}".split)
-  cmd.tables.each do |tablename|
-    Then("the output should contain \"#{tablename}\"")
-  end
+Then /^the command output includes the name of the table$/ do
+  Then("the output should contain \"#{@tablename}\"")
 end

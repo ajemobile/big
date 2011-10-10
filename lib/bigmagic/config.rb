@@ -5,6 +5,12 @@ module Bigmagic
   Server = Struct.new('Server', :ip, :port, :username, :password, :database)
   Database = Struct.new('Database', :name, :schema)
 
+  class Server
+    def to_s
+      "[#{ip}:#{port}].[#{database.name}]"
+    end
+  end
+
   class Config
 
     attr_reader :target, :source

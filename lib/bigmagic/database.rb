@@ -2,11 +2,12 @@ module Bigmagic
 
   class Database
 
-    attr_accessor :name, :schema
-    attr_accessor :recordset
-
-    def initialize
-      @recordset = nil
+    def create(object, attributes = nil)
+      if (object == :table)
+        Bigmagic::Table.new(attributes)
+      else
+        nil
+      end
     end
 
   end
