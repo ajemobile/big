@@ -2,8 +2,6 @@ module Bigmagic
 
   class ListCommand < Bigmagic::ServerCommand
 
-    attr_accessor :target, :source
-
     option ["-f", "--filter"], "FILTER", "SQL filter", :attribute_name => :filter, :default => nil
 
     parameter "OBJECT", "database resource: table|procedure|view", :attribute_name => :object
