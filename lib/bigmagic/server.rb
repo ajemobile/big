@@ -2,20 +2,25 @@ module Bigmagic
 
   class Server
 
+    attr_reader name, config
+
+    def initialize(name, config)
+      @name = name
+      @config = config
+    end
+
+    def to_s
+      "#{name} server: #{config.target}"
+    end
+
     def find(object)
-      find_table if object == :table
+      find_table
     end
 
     def find_table
-      tables = []
-      recordset = @database.query("select * from sysobjects where xtype = 'U'")
-      columns = @database.columns
-      recordset.each do |row|
-        table = @database.create(:table, Hash[*columns.zip(row).flatten])
-        tables << table
-      end
-      tables
+      puts "find_table"
     end
+
   end
 
 end
