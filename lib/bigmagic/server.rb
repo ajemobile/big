@@ -9,9 +9,9 @@ module Bigmagic
       @server_config = config
     end
 
-    def to_s
-      "#{name} server: #{server_config}"
-    end
+    # def to_s
+    #   "#{name} server: #{server_config}"
+    # end
 
   end
 

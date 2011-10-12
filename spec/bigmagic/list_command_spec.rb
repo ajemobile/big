@@ -20,11 +20,10 @@ module Bigmagic
 
         before(:each) do
           cmd.target = Bigmagic::Server.new('target', Bigmagic::Config.new.target)
-          cmd.source = Bigmagic::Server.new('source', Bigmagic::Config.new.source)
+          cmd.source = nil
         end
 
         it 'should find all tables from the target server' do
-          cmd.target.stub(:find).and_return(tables)
           cmd.target.should_receive(:find).with(:table).and_return(tables)
           cmd.run(['table'])
         end
