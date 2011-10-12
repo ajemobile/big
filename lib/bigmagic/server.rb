@@ -2,23 +2,15 @@ module Bigmagic
 
   class Server
 
-    attr_reader name, config
+    attr_reader :name, :server_config
 
     def initialize(name, config)
       @name = name
-      @config = config
+      @server_config = config
     end
 
     def to_s
-      "#{name} server: #{config.target}"
-    end
-
-    def find(object)
-      find_table
-    end
-
-    def find_table
-      puts "find_table"
+      "#{name} server: #{server_config}"
     end
 
   end

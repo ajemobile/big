@@ -2,10 +2,10 @@ require 'yaml'
 
 module Bigmagic
 
-  Server = Struct.new('Server', :ip, :port, :username, :password, :database)
-  Database = Struct.new('Database', :name, :schema)
+  ServerConfig = Struct.new('ServerConfig', :ip, :port, :username, :password, :database)
+  DatabaseConfig = Struct.new('DatabaseConfig', :name, :schema)
 
-  class Server
+  class ServerConfig
     def to_s
       "[#{ip}:#{port}].[#{database.name}]"
     end
@@ -16,10 +16,10 @@ module Bigmagic
     attr_reader :target, :source
 
     def initialize
-      @target = Server.new
-      @source = Server.new
-      @target.database = Database.new
-      @source.database = Database.new
+      @target = ServerConfig.new
+      @source = ServerConfig.new
+      @target.database = DatabaseConfig.new
+      @source.database = DatabaseConfig.new
       default!
     end
 

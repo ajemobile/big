@@ -18,7 +18,7 @@ module Bigmagic
       # server used
       out.puts server.to_s
       # find tables
-      tables = server.find(object)
+      tables = server.find(:table)
       if tables.size > 0
         out.puts "Name\tId\tCreated\tDelete\tInsert\tUpdate\tSelect"
         tables.each {|table| out.puts table.to_s}
